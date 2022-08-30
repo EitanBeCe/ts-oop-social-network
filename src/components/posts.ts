@@ -1,5 +1,6 @@
 import { urlPosts } from '../helpers/urls.js';
-import { fetchPost } from '../services/httpService.js';
+import { PostList } from '../models/post.js';
+import { fetchGET, fetchPOST } from '../services/httpService.js';
 
 export class OpenPosts {
   contentEl: HTMLDivElement;
@@ -10,6 +11,7 @@ export class OpenPosts {
     // new AddPost();
     new OpenAddPost();
     new AddPost();
+    new ShowPosts();
   }
 }
 
@@ -46,7 +48,7 @@ class AddPost {
   private submitHandler(event: Event) {
     event.preventDefault();
     // console.log(this.nameInput.value);
-    fetchPost(urlPosts, { text: this.gatherUserInput() });
+    fetchPOST(urlPosts, { text: this.gatherUserInput() });
   }
 
   private gatherUserInput() {
@@ -57,6 +59,40 @@ class AddPost {
 
   configure() {
     const addPostBtn = document.getElementById('addpostform')! as HTMLFormElement;
-    addPostBtn.addEventListener('submit', this.submitHandler);
+    addPostBtn.addEventListener('submit', this.submitHandler.bind(this));
+  }
+}
+
+class ShowPosts {
+  // posts: string[];
+  posts: PostList;
+  contentEl: HTMLDivElement;
+
+  constructor() {
+    this.contentEl = document.getElementById('content')! as HTMLDivElement;
+    this.posts = { list: [] };
+    this.fetchPosts();
+    this.append();
+  }
+
+  private async fetchPosts() {
+    return await fetchGET(urlPosts).then((data) => {
+      console.log(data);
+
+      this.posts.list.push({ text: data });
+      console.log(this.posts);
+
+      // return this.posts.list.push({ text: JSON.stringify(data) });
+    });
+  }
+
+  append() {
+    const ulEl = document.createElement('div');
+    ulEl.innerHTML = `
+      <ul id="postlist">
+        <li id="post">DUmmy POst</li>
+      </ul>
+    `;
+    this.contentEl.insertAdjacentElement('beforeend', ulEl);
   }
 }

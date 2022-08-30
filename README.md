@@ -2,3 +2,8 @@
 
   // Fix console
   // Add post list by fetchGet
+
+Commands:
+
+- npm start
+- tsc -w

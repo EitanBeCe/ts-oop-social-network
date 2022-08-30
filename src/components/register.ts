@@ -1,7 +1,6 @@
-import { fetchPost } from '../services/httpService.js';
+import { urlAcc } from '../helpers/urls.js';
+import { fetchPOST } from '../services/httpService.js';
 import { OpenPosts } from './posts.js';
-
-const urlFirebase = 'https://nathan-test-c723c-default-rtdb.firebaseio.com/account.json'; //api/v1.0/account.json
 
 export class Registration {
   nameInput: HTMLInputElement;
@@ -21,8 +20,8 @@ export class Registration {
 
   private submitHandler(event: Event) {
     event.preventDefault();
-    console.log(this.nameInput.value);
-    fetchPost(urlFirebase, { name: this.nameInput.value, password: this.passwordInput.value });
+    // console.log(this.nameInput.value);
+    fetchPOST(urlAcc, { name: this.nameInput.value, password: this.passwordInput.value });
     new OpenPosts();
   }
 }
