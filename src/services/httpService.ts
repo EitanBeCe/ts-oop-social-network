@@ -1,7 +1,7 @@
-// const urlFirebase = 'https://nathan-test-c723c-default-rtdb.firebaseio.com/account.json'; //api/v1.0/account.json
-import { registerUser } from '../models/registerUser';
+import { post } from '../models/post.js';
+import { registerUser } from '../models/registerUser.js';
 
-export const fetchPost = async (url: string, body: registerUser) => {
+export const fetchPost = async (url: string, body: registerUser | post) => {
   const response = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -9,12 +9,25 @@ export const fetchPost = async (url: string, body: registerUser) => {
   });
   const data = await response.json();
   console.log(data);
+  if (response.ok) {
+    return data.name;
+  }
 };
 
 export const fetchGet = async (url: string) => {
   const response = await fetch(url);
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
+  for (let key in data) {
+    console.log({
+      id: key,
+      name: data[key].name,
+      password: data[key].password,
+    });
+    if (response.ok) {
+      return data.name;
+    }
+  }
 };
 
 //   if (!response.ok) {

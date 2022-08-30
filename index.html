@@ -6,18 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TS Task</title>
     <!-- <script src="dist/testFetch.js" defer></script> -->
-    <script src="dist/app.js" defer></script>
+    <script type="module" src="dist/app.js"></script>
   </head>
   <body>
-    <div id="test"></div>
+    <!-- <nav>
+      <a href="/">Login</a>
+      <a href="/posts">Posts</a>
+      <a href="/posts/comments">Comments</a>
+    </nav> -->
+    <div id="content">
+      <form action="submit" id="form">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" />
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" />
 
-    <form action="submit" id="form">
-      <label for="name">Name</label>
-      <input type="text" name="name" id="name" />
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" />
-
-      <button id="button">Click</button>
-    </form>
+        <button id="button">Click</button>
+      </form>
+    </div>
   </body>
 </html>
