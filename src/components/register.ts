@@ -1,5 +1,5 @@
-import { urlAcc } from '../helpers/urls.js';
-import { fetchPOST } from '../services/httpService.js';
+// import { urlAcc } from '../helpers/urls.js';
+// import { Fetch } from '../services/httpService.js';
 import { OpenPosts } from './posts.js';
 
 export class Registration {
@@ -20,8 +20,8 @@ export class Registration {
 
   private submitHandler(event: Event) {
     event.preventDefault();
-    // console.log(this.nameInput.value);
-    fetchPOST(urlAcc, { name: this.nameInput.value, password: this.passwordInput.value });
+    // SWITCH IT ON LATER!!
+    // Fetch.POST(urlAcc, { name: this.nameInput.value, password: this.passwordInput.value });
     new OpenPosts();
   }
 }
