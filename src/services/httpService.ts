@@ -56,13 +56,10 @@ export class Fetch {
 //     password: data[key].password,
 //   });
 
-// const transformedMeals = [];
-
 // for (let key in data) {
-//   transformedMeals.push({
+//   newArr.push({
 //     id: key,
 //     name: data[key].name,
 //     description: data[key].description,
-//     price: data[key].price,
 //   });
 // }
