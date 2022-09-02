@@ -2,6 +2,7 @@ export interface UserList {
   list: User[];
 }
 export interface User {
-  name: string;
+  id?: string;
+  name?: string;
   password: string;
 }

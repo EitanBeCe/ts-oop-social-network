@@ -33,17 +33,17 @@ class OpenAddPost {
 
 // Functionality for post adding
 class AddPost {
-  addPostText: HTMLTextAreaElement;
+  inputPostText: HTMLTextAreaElement;
 
   constructor() {
-    this.addPostText = document.getElementById('addpost')! as HTMLTextAreaElement;
+    this.inputPostText = document.getElementById('addpost')! as HTMLTextAreaElement;
     this.configure();
   }
 
   private gatherUserInput() {
-    const userInputPost = this.addPostText.value;
+    // const userInputPost = ;
     // console.log(userInputPost);
-    return userInputPost;
+    return this.inputPostText.value;
   }
 
   private submitHandler(event: Event) {
@@ -54,7 +54,7 @@ class AddPost {
   }
 
   private clearInput() {
-    this.addPostText.value = '';
+    this.inputPostText.value = '';
   }
 
   // Event listener

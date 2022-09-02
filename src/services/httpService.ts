@@ -2,6 +2,14 @@ import { Post } from '../models/post.js';
 import { User } from '../models/registerUser.js';
 
 export class Fetch {
+  static async GET(url: string) {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log('GET: ' + JSON.stringify(data));
+
+    return data;
+  }
+
   static async POST(url: string, body: User | Post) {
     const response = await fetch(url, {
       method: 'POST',
@@ -15,12 +23,17 @@ export class Fetch {
     }
   }
 
-  static async GET(url: string) {
-    const response = await fetch(url);
+  static async PUT(url: string, body: any) {
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
     const data = await response.json();
-    console.log('GET: ' + JSON.stringify(data));
-
-    return data;
+    console.log('PUT: ' + JSON.stringify(data));
+    if (response.ok) {
+      return data;
+    }
   }
 }
 

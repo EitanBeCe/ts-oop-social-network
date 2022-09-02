@@ -1,3 +1,5 @@
-import { Registration } from './components/register.js';
+import { ChangePass, Login, Signup } from './components/register.js';
 
-new Registration();
+new Login();
+new Signup();
+new ChangePass();
