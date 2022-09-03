@@ -23,7 +23,7 @@ export class Signup {
     event.preventDefault();
 
     Fetch.POST(urlAcc, { name: this.nameInput.value, password: this.passwordInput.value }).then(
-      () => new OpenPosts()
+      (userId) => new OpenPosts(userId)
     );
     // new OpenPosts();
   }
@@ -67,7 +67,7 @@ export class Login {
         const usersList = this.users.list;
         console.log(usersList);
 
-        // Name and pass from input exist?
+        // Name and pass from input exist on server?
         const filteredUser = usersList.filter(
           (user) => user.name === this.nameInput.value && user.password === this.passwordInput.value
         );
@@ -77,14 +77,11 @@ export class Login {
           throw new Error('Check your name and pass');
         }
         console.log(user.id);
-        console.log(typeof user.id);
-        // const userId = user.id!;
-        // Fetch.PUT(urlAcc, { [userId]: { name: user.name, password: user.password } });
+        // console.log(typeof user.id);
+
+        new OpenPosts(user.id!);
       })
-      .then(() => new OpenPosts())
-      .catch((e) => console.log(e));
-    //
-    // new OpenPosts();
+      .catch((e) => console.error(e));
   }
 }
 
@@ -132,11 +129,12 @@ export class ChangePass {
         if (user === undefined) {
           throw new Error('Check your name');
         }
-        console.log(user);
-        console.log(user.id);
-        console.log(typeof user.id);
+        // console.log(user);
+        // console.log(user.id);
         // const userId = user.id!;
         // Fetch.PUT(urlAcc, { [userId]: { name: user.name, password: user.password } });
+
+        new OpenPosts(user.id!);
       })
       .catch((e) => console.log(e));
     // .then(() => new OpenPosts());
