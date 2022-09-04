@@ -1,5 +1,5 @@
 {
-  "name": "understanding-ts",
+  "name": "ts-oop-social-network",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "lite-server"
   },
-  "author": "Maximilian Schwarzmüller",
+  "author": "Eitan EL",
   "license": "ISC",
   "devDependencies": {
     "lite-server": "^2.6.1"
