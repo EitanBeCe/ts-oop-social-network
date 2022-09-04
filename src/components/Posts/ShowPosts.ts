@@ -27,7 +27,7 @@ export class ShowPosts {
           });
         }
         this.posts.list = list;
-        console.log(this.posts);
+        console.log('PostsList:', this.posts);
 
         this.append(this.firstRender);
 

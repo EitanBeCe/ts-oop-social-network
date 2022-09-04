@@ -39,7 +39,7 @@ export class Login {
         // console.log(this.users.list);
 
         const usersList = this.users.list;
-        console.log(usersList);
+        console.log('UsersList:', usersList);
 
         // Name and pass from input exist on server?
         const filteredUser = usersList.filter(
@@ -50,7 +50,7 @@ export class Login {
         if (user === undefined) {
           throw new Error('Check your name and pass');
         }
-        console.log(user.id);
+        console.log('UserId:', user.id);
         // console.log(typeof user.id);
 
         new OpenPosts(user.id!);
