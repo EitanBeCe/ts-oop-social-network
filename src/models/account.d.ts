@@ -7,3 +7,12 @@ export type AccountCodable = {
   name?: string;
   password: string;
 };
+
+export type ServerFormatAccountCodable = {
+  id: keyof Acc;
+};
+
+export type Acc = {
+  name: string;
+  password: string;
+};

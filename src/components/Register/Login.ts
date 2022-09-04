@@ -1,5 +1,5 @@
 import { urlAcc } from '../../helpers/urls.js';
-import { AccountsCodable } from '../../models/registerUser.js';
+import { AccountsCodable } from '../../models/account.js';
 import { Fetch } from '../../services/httpService.js';
 import { OpenPosts } from '../Posts/OpenPosts.js';
 

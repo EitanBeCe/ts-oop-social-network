@@ -1,7 +1,7 @@
 import { ErrorCodable } from './error';
 
-export type ResponseCodable<T> = {
-  data: T;
-  errors: ErrorCodable[];
+export interface ResponseCodable<T> {
+  data?: T;
+  errors?: ErrorCodable[];
   status: number;
-};
+}

@@ -1,13 +1,48 @@
 import { PostCodable } from '../models/post.js';
-import { AccountCodable } from '../models/registerUser.js';
+import { AccountCodable } from '../models/account.js';
+import { ResponseCodable } from '../models/response.js';
 
+// https://www.youtube.com/watch?v=-oey4jgc22k ТИПЫ В ФЕТЧЕ
 export class Fetch {
-  static async GET(url: string) {
+  static async GET<T>(url: string): Promise<ResponseCodable<T>> {
+    // : Promise<ResponseCodable<T>>
+    // static async GET<T>(url: string): Promise<T> {
     const response = await fetch(url);
-    const data = await response.json();
-    console.log('GET: ' + JSON.stringify(data));
+    try {
+      // console.log(response);
+      const data = (await response.json()) as T; //as T
 
-    return data;
+      const responseCodable: ResponseCodable<T> = {
+        data: data,
+        status: response.status,
+      };
+
+      console.log(responseCodable);
+
+      if (!response.ok) {
+        throw new Error('Data was not fetched');
+      }
+
+      console.log('GET: ' + JSON.stringify(data));
+
+      // return data;
+      return responseCodable;
+    } catch (error) {
+      console.dir(error);
+
+      // https://www.youtube.com/watch?v=0GLYiJUBz6k ОШИБКИ И ТИПЫ
+      const responseCodable: ResponseCodable<T> = {
+        // errors: [
+        //   {
+        //     code: response,
+        //     message: error.message,
+        //   },
+        // ],
+        status: response.status,
+      };
+
+      return responseCodable;
+    }
   }
 
   static async POST(url: string, body: AccountCodable | PostCodable) {

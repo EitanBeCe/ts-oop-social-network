@@ -1,4 +1,5 @@
 import { urlPosts } from '../../helpers/urls.js';
+import { ServerFormatAccountCodable } from '../../models/account.js';
 import { PostsCodable } from '../../models/post.js';
 import { Fetch } from '../../services/httpService.js';
 import { EditPost } from './EditPost.js';
@@ -15,17 +16,23 @@ export class ShowPosts {
   }
 
   private async fetchPosts() {
-    return await Fetch.GET(urlPosts)
+    return await Fetch.GET<ServerFormatAccountCodable>(urlPosts)
       .then((data) => {
         const list = [];
-        for (let key in data) {
-          list.push({
-            id: key,
-            text: data[key].text,
-            ownerId: data[key].ownerId,
-            created_at: data[key].created_at,
-          });
+        const d = data.data;
+
+        // https://bobbyhadz.com/blog/typescript-element-implicitly-has-any-type-expression#:~:text=The%20error%20%22Element%20implicitly%20has,one%20of%20the%20object's%20keys.
+        if (d) {
+          for (let key in d) {
+            list.push({
+              id: key,
+              text: d[key].text,
+              ownerId: data[key].ownerId,
+              created_at: data[key].created_at,
+            });
+          }
         }
+
         this.posts.list = list;
         console.log('PostsList:', this.posts);
 

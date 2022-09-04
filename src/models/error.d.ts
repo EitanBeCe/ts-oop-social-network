@@ -1,4 +1,4 @@
 export type ErrorCodable = {
-  code: string;
-  message: string;
+  code: string; // error
+  message?: string; // error.message
 };
