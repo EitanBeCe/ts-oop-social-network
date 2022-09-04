@@ -1,11 +1,11 @@
 import { urlPosts } from '../../helpers/urls.js';
-import { PostList } from '../../models/post.js';
+import { PostsCodable } from '../../models/post.js';
 import { Fetch } from '../../services/httpService.js';
 import { EditPost } from './EditPost.js';
 
 export class ShowPosts {
   // posts: string[];
-  posts: PostList;
+  posts: PostsCodable;
   contentEl: HTMLDivElement;
 
   constructor(public firstRender: boolean = true) {

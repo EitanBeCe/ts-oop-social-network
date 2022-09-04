@@ -1,10 +1,10 @@
 import { urlPostsPut } from '../../helpers/urls.js';
-import { PostList } from '../../models/post.js';
+import { PostsCodable } from '../../models/post.js';
 import { Fetch } from '../../services/httpService.js';
 
 export class EditPost {
   ulPosts: HTMLUListElement;
-  constructor(public postsArr: PostList) {
+  constructor(public postsArr: PostsCodable) {
     this.ulPosts = document.getElementById('postlist')! as HTMLUListElement;
     this.configure();
   }

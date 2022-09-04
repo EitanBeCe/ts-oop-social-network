@@ -1,8 +1,8 @@
-export interface UserList {
-  list: User[];
-}
-export interface User {
+export type UsersCodable = {
+  list: UserCodable[] | [];
+};
+export type UserCodable = {
   id?: string;
   name?: string;
   password: string;
-}
+};

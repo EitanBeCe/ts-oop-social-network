@@ -1,5 +1,5 @@
 import { urlAcc, urlAccPut } from '../../helpers/urls.js';
-import { UserList } from '../../models/registerUser.js';
+import { UsersCodable } from '../../models/registerUser.js';
 import { Fetch } from '../../services/httpService.js';
 import { OpenPosts } from '../Posts/OpenPosts.js';
 
@@ -7,7 +7,7 @@ export class ChangePass {
   nameInput: HTMLInputElement;
   passwordInput: HTMLInputElement;
   btnChangePass: HTMLButtonElement;
-  users: UserList;
+  users: UsersCodable;
 
   constructor() {
     this.nameInput = document.getElementById('name')! as HTMLInputElement;
