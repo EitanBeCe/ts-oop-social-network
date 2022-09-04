@@ -1,4 +1,4 @@
-import { urlPosts } from '../helpers/urls.js';
+import { urlPosts, urlPostsPut } from '../helpers/urls.js';
 import { PostList } from '../models/post.js';
 import { Fetch } from '../services/httpService.js';
 
@@ -71,18 +71,21 @@ class AddPost {
 class ShowPosts {
   // posts: string[];
   posts: PostList;
+  postsInitialFormat: {};
   contentEl: HTMLDivElement;
 
   constructor(public firstRender: boolean = true) {
     this.contentEl = document.getElementById('app')! as HTMLDivElement;
     this.posts = { list: [] };
+    this.postsInitialFormat = {};
     this.fetchPosts();
   }
 
   private async fetchPosts() {
     return await Fetch.GET(urlPosts)
       .then((data) => {
-        // console.log(data);
+        // this.postsInitialFormat = data;
+        // console.log(this.postsInitialFormat);
 
         const list = [];
         for (let key in data) {
@@ -97,8 +100,10 @@ class ShowPosts {
         console.log(this.posts);
 
         this.append(this.firstRender);
+
+        return this.posts;
       })
-      .then(() => new EditPost());
+      .then((postsArr) => new EditPost(postsArr));
   }
 
   private append(firstTimeRender: boolean) {
@@ -137,7 +142,7 @@ class ShowPosts {
 
 class EditPost {
   ulPosts: HTMLUListElement;
-  constructor() {
+  constructor(public postsArr: PostList) {
     this.ulPosts = document.getElementById('postlist')! as HTMLUListElement;
     this.configure();
   }
@@ -151,7 +156,7 @@ class EditPost {
     }
   }
 
-  enterEditModeHandler(li: HTMLLIElement) {
+  private enterEditModeHandler(li: HTMLLIElement) {
     // console.log(li);
     li.innerHTML = `
       <form action="submit" id="editpostform">
@@ -164,19 +169,44 @@ class EditPost {
     this.configureEditPost(li);
   }
 
-  configureEditPost(li: HTMLLIElement) {
+  private configureEditPost(li: HTMLLIElement) {
     const editForm = document.getElementById('editpostform');
-    const editInput = document.getElementById('editpost')! as HTMLTextAreaElement;
-    editForm!.addEventListener('submit', this.editPost.bind(this, li, editInput));
+
+    editForm!.addEventListener('submit', this.editPost.bind(this, li));
   }
 
-  editPost(li: HTMLLIElement, editInput: HTMLTextAreaElement) {
-    // PUT !!!
-    // then (may be just GET it)
-    console.log(li, editInput);
+  private editPost(li: HTMLLIElement) {
+    console.log(li);
+    const postId = li.id;
+
+    const filteredPost = this.postsArr.list.filter((post) => post.id === postId);
+    const post = filteredPost[0];
+    console.log(post);
+
+    const editInput = document.getElementById('editpost')! as HTMLTextAreaElement;
+    // console.log(editInput.value);
+
+    Fetch.PUT(urlPostsPut(postId), {
+      created_at: post.created_at,
+      owner: post.owner,
+      text: editInput.value,
+      updated_at: new Date(),
+    })
+      .then((data) => {
+        // console.log(data.text);
+        if (data.text) {
+          li.innerHTML = data.text;
+        } else {
+          throw new Error('No fetched post text');
+        }
+      })
+      .then(() =>
+        li.addEventListener('click', this.enterEditModeHandler.bind(this, li), { once: true })
+      )
+      .catch((e) => console.error(e));
 
     li.innerHTML = `
-      ${editInput}
+      Changing text...
     `;
   }
 }

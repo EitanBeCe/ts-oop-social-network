@@ -1,4 +1,4 @@
-import { urlAcc } from '../helpers/urls.js';
+import { urlAcc, urlAccPut } from '../helpers/urls.js';
 import { UserList } from '../models/registerUser.js';
 import { Fetch } from '../services/httpService.js';
 import { OpenPosts } from './posts.js';
@@ -131,14 +131,11 @@ export class ChangePass {
         }
         // console.log(user);
         // console.log(user.id);
-        // const userId = user.id!;
-        // Fetch.PUT(urlAcc, { [userId]: { name: user.name, password: user.password } });
+        Fetch.PUT(urlAccPut(user.id!), { name: user.name, password: this.passwordInput.value });
 
-        new OpenPosts(user.id!);
+        return user.id;
       })
-      .catch((e) => console.log(e));
-    // .then(() => new OpenPosts());
-    //
-    // new OpenPosts();
+      .then((userId) => new OpenPosts(userId!))
+      .catch((e) => console.error(e));
   }
 }
