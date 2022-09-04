@@ -1,11 +1,11 @@
 export type PostsCodable = {
-  list: PostCodable[] | [];
+  list: PostCodable[];
 };
 
 export type PostCodable = {
   id?: string;
   text: string;
-  owner: string;
+  ownerId: string;
   created_at: Date;
   updated_at?: Date;
 };

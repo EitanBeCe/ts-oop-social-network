@@ -20,12 +20,12 @@ export class EditPost {
 
   private enterEditModeHandler(li: HTMLLIElement) {
     li.innerHTML = `
-        <form action="submit" id="editpostform">
-                  <label for="editpost">Edit post</label>
-                  <textarea type="text" id="editpost">${li.innerText}</textarea>
-                  <button>Edit</button>
-              </form>
-      `;
+      <form action="submit" id="editpostform">
+        <label for="editpost">Edit post</label>
+        <textarea type="text" id="editpost">${li.innerText}</textarea>
+        <button>Edit</button>
+      </form>
+    `;
 
     this.configureEditPost(li);
   }
@@ -48,7 +48,7 @@ export class EditPost {
 
     Fetch.PUT(urlPostsPut(postId), {
       created_at: post.created_at,
-      owner: post.owner,
+      ownerId: post.ownerId,
       text: editInput.value,
       updated_at: new Date(),
     })
@@ -65,7 +65,7 @@ export class EditPost {
       .catch((e) => console.error(e));
 
     li.innerHTML = `
-        Changing text...
-      `;
+      Changing text...
+    `;
   }
 }

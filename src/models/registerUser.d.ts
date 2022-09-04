@@ -1,7 +1,8 @@
-export type UsersCodable = {
-  list: UserCodable[] | [];
+export type AccountsCodable = {
+  list: AccountCodable[];
 };
-export type UserCodable = {
+
+export type AccountCodable = {
   id?: string;
   name?: string;
   password: string;

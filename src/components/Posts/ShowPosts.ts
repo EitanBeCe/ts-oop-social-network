@@ -22,7 +22,7 @@ export class ShowPosts {
           list.push({
             id: key,
             text: data[key].text,
-            owner: data[key].owner,
+            ownerId: data[key].ownerId,
             created_at: data[key].created_at,
           });
         }

@@ -1,5 +1,5 @@
 import { PostCodable } from '../models/post.js';
-import { UserCodable } from '../models/registerUser.js';
+import { AccountCodable } from '../models/registerUser.js';
 
 export class Fetch {
   static async GET(url: string) {
@@ -10,7 +10,7 @@ export class Fetch {
     return data;
   }
 
-  static async POST(url: string, body: UserCodable | PostCodable) {
+  static async POST(url: string, body: AccountCodable | PostCodable) {
     const response = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

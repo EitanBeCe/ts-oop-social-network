@@ -26,7 +26,7 @@ export class AddPost {
 
     Fetch.POST(urlPosts, {
       text: this.gatherUserInput(),
-      owner: this.userId,
+      ownerId: this.userId,
       created_at: new Date(),
     }).then(() => new ShowPosts(false)); // Add new post to server and update a list of posts
     this.clearInput();
