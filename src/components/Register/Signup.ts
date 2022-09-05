@@ -1,4 +1,5 @@
 import { urlAcc } from '../../helpers/urls.js';
+import { AccountCodablePOSTResponse } from '../../models/account.js';
 import { Fetch } from '../../services/httpService.js';
 import { OpenPosts } from '../Posts/OpenPosts.js';
 
@@ -21,9 +22,10 @@ export class Signup {
   private submitHandler(event: Event) {
     event.preventDefault();
 
-    Fetch.POST(urlAcc, { name: this.nameInput.value, password: this.passwordInput.value }).then(
-      (userId) => new OpenPosts(userId)
-    );
+    Fetch.POST<AccountCodablePOSTResponse>(urlAcc, {
+      name: this.nameInput.value,
+      password: this.passwordInput.value,
+    }).then((data) => data.data?.name && new OpenPosts(data.data.name));
     // new OpenPosts();
   }
 }

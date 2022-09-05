@@ -29,7 +29,7 @@ export class Login {
       .then((data) => {
         const list = [];
         const accountData = data.data;
-        console.log(accountData);
+        // console.log(accountData);
 
         if (accountData) {
           for (let key in accountData) {
@@ -57,7 +57,7 @@ export class Login {
         if (user === undefined) {
           throw new Error('Check your name and pass');
         }
-        console.log('UserId:', user.id);
+        console.log('LoggedUserId:', user.id);
         // console.log(typeof user.id);
 
         new OpenPosts(user.id!);

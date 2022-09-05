@@ -65,7 +65,7 @@ export class EditPost {
       .catch((e) => console.error(e));
 
     li.innerHTML = `
-      Changing text...
+      Changing post...
     `;
   }
 }

@@ -4,6 +4,8 @@ import { ResponseCodable } from '../models/response.js';
 
 // https://www.youtube.com/watch?v=-oey4jgc22k ТИПЫ В ФЕТЧЕ
 export class Fetch {
+  // ********* GET
+
   static async GET<T>(url: string): Promise<ResponseCodable<T>> {
     const response = await fetch(url);
     try {
@@ -14,7 +16,6 @@ export class Fetch {
         data: data,
         status: response.status,
       };
-
       console.log('GET: ', responseCodable);
       // console.log('GET: ' + JSON.stringify(data));
 
@@ -37,12 +38,16 @@ export class Fetch {
         // ],
         status: response.status,
       };
-
       return responseCodable;
     }
   }
 
-  static async POST(url: string, body: AccountCodable | PostCodable) {
+  // ********* POST
+
+  static async POST<T>(
+    url: string,
+    body: AccountCodable | PostCodable
+  ): Promise<ResponseCodable<T>> {
     const response = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -50,17 +55,37 @@ export class Fetch {
     });
 
     try {
-      const data = await response.json();
-      console.log('POST: ' + JSON.stringify(data));
+      const data = (await response.json()) as T;
+
+      const responseCodable: ResponseCodable<T> = {
+        data: data,
+        status: response.status,
+      };
+      console.log('POST: ', responseCodable);
+      // console.log('POST: ' + JSON.stringify(data));
+
       if (!response.ok) {
         throw new Error();
       }
-      return data;
+
+      return responseCodable;
     } catch (error) {
-      console.log(error);
-      return error;
+      console.dir(error);
+
+      const responseCodable: ResponseCodable<T> = {
+        // errors: [
+        //   {
+        //     code: response,
+        //     message: error.message,
+        //   },
+        // ],
+        status: response.status,
+      };
+      return responseCodable;
     }
   }
+
+  // ********* PUT
 
   static async PUT(url: string, body: any) {
     const response = await fetch(url, {
@@ -68,6 +93,7 @@ export class Fetch {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
+
     try {
       const data = await response.json();
       console.log('PUT: ' + JSON.stringify(data));
