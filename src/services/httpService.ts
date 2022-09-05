@@ -22,8 +22,8 @@ export class Fetch {
         throw new Error('Data was not fetched');
       }
 
-      // return data;
       return responseCodable;
+      // return data;
     } catch (error) {
       console.dir(error);
 
@@ -48,10 +48,17 @@ export class Fetch {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
-    const data = await response.json();
-    console.log('POST: ' + JSON.stringify(data));
-    if (response.ok) {
+
+    try {
+      const data = await response.json();
+      console.log('POST: ' + JSON.stringify(data));
+      if (!response.ok) {
+        throw new Error();
+      }
       return data;
+    } catch (error) {
+      console.log(error);
+      return error;
     }
   }
 
@@ -61,38 +68,19 @@ export class Fetch {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
-    const data = await response.json();
-    console.log('PUT: ' + JSON.stringify(data));
-    if (response.ok) {
+    try {
+      const data = await response.json();
+      console.log('PUT: ' + JSON.stringify(data));
+      if (!response.ok) {
+        throw new Error();
+      }
       return data;
+    } catch (error) {
+      console.log(error);
+      return error;
     }
   }
 }
-
-// export const fetchPOST = async (url: string, body: User | Post) => {
-//   const response = await fetch(url, {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify(body),
-//   });
-//   const data = await response.json();
-//   console.log('POST: ' + JSON.stringify(data));
-//   if (response.ok) {
-//     return data;
-//   }
-// };
-
-// export const fetchGET = async (url: string) => {
-//   const response = await fetch(url);
-//   const data = await response.json();
-//   console.log('GET: ' + JSON.stringify(data));
-
-//   return data;
-// };
-
-//   if (!response.ok) {
-//     throw new Error('Something went wrong');
-//   }
 
 // for (let key in data) {
 //   console.log({
