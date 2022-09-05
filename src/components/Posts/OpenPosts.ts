@@ -7,6 +7,7 @@ export class OpenPosts {
   constructor(public userId: string) {
     this.contentEl = document.getElementById('app')! as HTMLDivElement;
     new OpenAddPostScreen();
+
     new AddPost(userId);
     new ShowPosts();
   }

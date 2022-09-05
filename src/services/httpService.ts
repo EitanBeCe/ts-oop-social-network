@@ -1,53 +1,22 @@
 import { PostCodable } from '../models/post.js';
 import { AccountCodable } from '../models/account.js';
 import { ResponseCodable } from '../models/response.js';
+import { Err } from '../helpers/errors.js';
+import { Try } from '../helpers/tryResponse.js';
 
-// https://www.youtube.com/watch?v=-oey4jgc22k ТИПЫ В ФЕТЧЕ
+type bodyTypes = AccountCodable | PostCodable;
+
 export class Fetch {
-  // ********* GET
-
   static async GET<T>(url: string): Promise<ResponseCodable<T>> {
     const response = await fetch(url);
     try {
-      // console.log(response);
-      const data = (await response.json()) as T; //as T
-
-      const responseCodable: ResponseCodable<T> = {
-        data: data,
-        status: response.status,
-      };
-      console.log('GET: ', responseCodable);
-      // console.log('GET: ' + JSON.stringify(data));
-
-      if (!response.ok) {
-        throw new Error('Data was not fetched');
-      }
-
-      return responseCodable;
-      // return data;
+      return Try.response<T>(response, 'GET');
     } catch (error) {
-      console.dir(error);
-
-      // https://www.youtube.com/watch?v=0GLYiJUBz6k ОШИБКИ И ТИПЫ
-      const responseCodable: ResponseCodable<T> = {
-        // errors: [
-        //   {
-        //     code: response,
-        //     message: error.message,
-        //   },
-        // ],
-        status: response.status,
-      };
-      return responseCodable;
+      return Err.handler<T>(error, response);
     }
   }
 
-  // ********* POST
-
-  static async POST<T>(
-    url: string,
-    body: AccountCodable | PostCodable
-  ): Promise<ResponseCodable<T>> {
+  static async POST<T>(url: string, body: bodyTypes): Promise<ResponseCodable<T>> {
     const response = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -55,42 +24,13 @@ export class Fetch {
     });
 
     try {
-      const data = (await response.json()) as T;
-
-      const responseCodable: ResponseCodable<T> = {
-        data: data,
-        status: response.status,
-      };
-      console.log('POST: ', responseCodable);
-      // console.log('POST: ' + JSON.stringify(data));
-
-      if (!response.ok) {
-        throw new Error();
-      }
-
-      return responseCodable;
+      return Try.response<T>(response, 'POST');
     } catch (error) {
-      console.dir(error);
-
-      const responseCodable: ResponseCodable<T> = {
-        // errors: [
-        //   {
-        //     code: response,
-        //     message: error.message,
-        //   },
-        // ],
-        status: response.status,
-      };
-      return responseCodable;
+      return Err.handler<T>(error, response);
     }
   }
 
-  // ********* PUT
-
-  static async PUT<T>(
-    url: string,
-    body: PostCodable | AccountCodable
-  ): Promise<ResponseCodable<T>> {
+  static async PUT<T>(url: string, body: bodyTypes): Promise<ResponseCodable<T>> {
     const response = await fetch(url, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -98,34 +38,9 @@ export class Fetch {
     });
 
     try {
-      const data = (await response.json()) as T;
-
-      const responseCodable: ResponseCodable<T> = {
-        data: data,
-        status: response.status,
-      };
-      console.log('PUT: ', responseCodable);
-      // console.log('PUT: ' + JSON.stringify(data));
-
-      if (!response.ok) {
-        throw new Error();
-      }
-
-      return responseCodable;
-      // return data;
+      return Try.response<T>(response, 'PUT');
     } catch (error) {
-      console.dir(error);
-
-      const responseCodable: ResponseCodable<T> = {
-        // errors: [
-        //   {
-        //     code: response,
-        //     message: error.message,
-        //   },
-        // ],
-        status: response.status,
-      };
-      return responseCodable;
+      return Err.handler<T>(error, response);
     }
   }
 }

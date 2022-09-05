@@ -16,6 +16,7 @@ Commands:
 /
 Дальше
 
-- any in PUT args
 - Ошбики через РеспонсКодебл
 - Ошиб во всех фетчах в компонентах
+- ошибки // https://kentcdodds.com/blog/get-a-catch-block-error-message-with-typescript
+  // https://www.youtube.com/watch?v=0GLYiJUBz6k
