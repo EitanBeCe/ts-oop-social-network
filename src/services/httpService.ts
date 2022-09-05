@@ -5,8 +5,6 @@ import { ResponseCodable } from '../models/response.js';
 // https://www.youtube.com/watch?v=-oey4jgc22k ТИПЫ В ФЕТЧЕ
 export class Fetch {
   static async GET<T>(url: string): Promise<ResponseCodable<T>> {
-    // : Promise<ResponseCodable<T>>
-    // static async GET<T>(url: string): Promise<T> {
     const response = await fetch(url);
     try {
       // console.log(response);
@@ -17,13 +15,12 @@ export class Fetch {
         status: response.status,
       };
 
-      console.log(responseCodable);
+      console.log('GET: ', responseCodable);
+      // console.log('GET: ' + JSON.stringify(data));
 
       if (!response.ok) {
         throw new Error('Data was not fetched');
       }
-
-      console.log('GET: ' + JSON.stringify(data));
 
       // return data;
       return responseCodable;

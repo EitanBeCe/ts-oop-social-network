@@ -1,5 +1,5 @@
 import { urlAcc, urlAccPut } from '../../helpers/urls.js';
-import { AccountsCodable } from '../../models/account.js';
+import { AccountCodableServerFormat, AccountsCodable } from '../../models/account.js';
 import { Fetch } from '../../services/httpService.js';
 import { OpenPosts } from '../Posts/OpenPosts.js';
 
@@ -25,15 +25,20 @@ export class ChangePass {
   private submitHandler(event: Event) {
     event.preventDefault();
 
-    Fetch.GET(urlAcc)
+    Fetch.GET<AccountCodableServerFormat>(urlAcc)
       .then((data) => {
         const list = [];
-        for (let key in data) {
-          list.push({
-            id: key,
-            name: data[key].name,
-            password: data[key].password,
-          });
+        const d = data.data;
+        if (d) {
+          for (let key in d) {
+            list.push({
+              id: key,
+              name: d[key as keyof AccountCodableServerFormat].name,
+              password: d[key as keyof AccountCodableServerFormat].password,
+            });
+          }
+        } else {
+          // ERROR
         }
         this.users.list = list;
         // console.log(this.users.list);

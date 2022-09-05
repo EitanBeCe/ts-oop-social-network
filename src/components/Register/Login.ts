@@ -1,5 +1,5 @@
 import { urlAcc } from '../../helpers/urls.js';
-import { AccountsCodable } from '../../models/account.js';
+import { AccountCodableServerFormat, AccountsCodable } from '../../models/account.js';
 import { Fetch } from '../../services/httpService.js';
 import { OpenPosts } from '../Posts/OpenPosts.js';
 
@@ -25,15 +25,22 @@ export class Login {
   private submitHandler(event: Event) {
     event.preventDefault();
 
-    Fetch.GET(urlAcc)
+    Fetch.GET<AccountCodableServerFormat>(urlAcc)
       .then((data) => {
         const list = [];
-        for (let key in data) {
-          list.push({
-            id: key,
-            name: data[key].name,
-            password: data[key].password,
-          });
+        const accountData = data.data;
+        console.log(accountData);
+
+        if (accountData) {
+          for (let key in accountData) {
+            list.push({
+              id: key,
+              name: accountData[key as keyof AccountCodableServerFormat].name,
+              password: accountData[key as keyof AccountCodableServerFormat].password,
+            });
+          }
+        } else {
+          // ERROR
         }
         this.users.list = list;
         // console.log(this.users.list);

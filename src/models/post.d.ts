@@ -9,3 +9,15 @@ export type PostCodable = {
   created_at: Date;
   updated_at?: Date;
 };
+
+export type PostsCodableServerFormat = {
+  id: PostServerFormat;
+};
+
+export type PostServerFormat = {
+  id: string;
+  text: string;
+  ownerId: string;
+  created_at: Date;
+  updated_at?: Date;
+};

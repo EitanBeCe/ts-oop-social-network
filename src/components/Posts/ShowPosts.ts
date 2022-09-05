@@ -1,6 +1,5 @@
 import { urlPosts } from '../../helpers/urls.js';
-import { ServerFormatAccountCodable } from '../../models/account.js';
-import { PostsCodable } from '../../models/post.js';
+import { PostsCodable, PostsCodableServerFormat } from '../../models/post.js';
 import { Fetch } from '../../services/httpService.js';
 import { EditPost } from './EditPost.js';
 
@@ -16,21 +15,25 @@ export class ShowPosts {
   }
 
   private async fetchPosts() {
-    return await Fetch.GET<ServerFormatAccountCodable>(urlPosts)
+    return await Fetch.GET<PostsCodableServerFormat>(urlPosts)
       .then((data) => {
         const list = [];
-        const d = data.data;
+        const postsData = data.data;
 
+        // Мб проще передать функцию трансформа в ГЕТ
         // https://bobbyhadz.com/blog/typescript-element-implicitly-has-any-type-expression#:~:text=The%20error%20%22Element%20implicitly%20has,one%20of%20the%20object's%20keys.
-        if (d) {
-          for (let key in d) {
+        if (postsData) {
+          for (let key in postsData) {
             list.push({
               id: key,
-              text: d[key].text,
-              ownerId: data[key].ownerId,
-              created_at: data[key].created_at,
+              text: postsData[key as keyof PostsCodableServerFormat].text,
+              ownerId: postsData[key as keyof PostsCodableServerFormat].ownerId,
+              created_at: postsData[key as keyof PostsCodableServerFormat].created_at,
+              updated_at: postsData[key as keyof PostsCodableServerFormat].updated_at,
             });
           }
+        } else {
+          // error
         }
 
         this.posts.list = list;

@@ -8,8 +8,8 @@ export type AccountCodable = {
   password: string;
 };
 
-export type ServerFormatAccountCodable = {
-  id: keyof Acc;
+export type AccountCodableServerFormat = {
+  id: Acc;
 };
 
 export type Acc = {
