@@ -1,5 +1,5 @@
 import { urlPostsPut } from '../../helpers/urls.js';
-import { PostsCodable } from '../../models/post.js';
+import { PostCodable, PostsCodable } from '../../models/post.js';
 import { Fetch } from '../../services/httpService.js';
 
 export class EditPost {
@@ -46,15 +46,15 @@ export class EditPost {
 
     const editInput = document.getElementById('editpost')! as HTMLTextAreaElement;
 
-    Fetch.PUT(urlPostsPut(postId), {
+    Fetch.PUT<PostCodable>(urlPostsPut(postId), {
       created_at: post.created_at,
       ownerId: post.ownerId,
       text: editInput.value,
       updated_at: new Date(),
     })
       .then((data) => {
-        if (data.text) {
-          li.innerHTML = data.text;
+        if (data.data) {
+          li.innerHTML = data.data.text;
         } else {
           throw new Error('No fetched post text');
         }

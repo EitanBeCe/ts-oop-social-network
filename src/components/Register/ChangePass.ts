@@ -1,5 +1,9 @@
 import { urlAcc, urlAccPut } from '../../helpers/urls.js';
-import { AccountCodableServerFormat, AccountsCodable } from '../../models/account.js';
+import {
+  AccountCodable,
+  AccountCodableServerFormat,
+  AccountsCodable,
+} from '../../models/account.js';
 import { Fetch } from '../../services/httpService.js';
 import { OpenPosts } from '../Posts/OpenPosts.js';
 
@@ -28,13 +32,13 @@ export class ChangePass {
     Fetch.GET<AccountCodableServerFormat>(urlAcc)
       .then((data) => {
         const list = [];
-        const d = data.data;
-        if (d) {
-          for (let key in d) {
+        const accountsData = data.data;
+        if (accountsData) {
+          for (let key in accountsData) {
             list.push({
               id: key,
-              name: d[key as keyof AccountCodableServerFormat].name,
-              password: d[key as keyof AccountCodableServerFormat].password,
+              name: accountsData[key as keyof AccountCodableServerFormat].name,
+              password: accountsData[key as keyof AccountCodableServerFormat].password,
             });
           }
         } else {
@@ -54,11 +58,13 @@ export class ChangePass {
         }
         // console.log(user);
         // console.log(user.id);
-        Fetch.PUT(urlAccPut(user.id!), { name: user.name, password: this.passwordInput.value });
-
-        return user.id;
+        Fetch.PUT<AccountCodable>(urlAccPut(user.id!), {
+          name: user.name,
+          password: this.passwordInput.value,
+        }).then(() => {
+          new OpenPosts(user.id!);
+        });
       })
-      .then((userId) => new OpenPosts(userId!))
       .catch((e) => console.error(e));
   }
 }

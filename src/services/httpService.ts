@@ -87,7 +87,10 @@ export class Fetch {
 
   // ********* PUT
 
-  static async PUT(url: string, body: any) {
+  static async PUT<T>(
+    url: string,
+    body: PostCodable | AccountCodable
+  ): Promise<ResponseCodable<T>> {
     const response = await fetch(url, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -95,15 +98,34 @@ export class Fetch {
     });
 
     try {
-      const data = await response.json();
-      console.log('PUT: ' + JSON.stringify(data));
+      const data = (await response.json()) as T;
+
+      const responseCodable: ResponseCodable<T> = {
+        data: data,
+        status: response.status,
+      };
+      console.log('PUT: ', responseCodable);
+      // console.log('PUT: ' + JSON.stringify(data));
+
       if (!response.ok) {
         throw new Error();
       }
-      return data;
+
+      return responseCodable;
+      // return data;
     } catch (error) {
-      console.log(error);
-      return error;
+      console.dir(error);
+
+      const responseCodable: ResponseCodable<T> = {
+        // errors: [
+        //   {
+        //     code: response,
+        //     message: error.message,
+        //   },
+        // ],
+        status: response.status,
+      };
+      return responseCodable;
     }
   }
 }
