@@ -6,6 +6,10 @@
   width: 230px;
 }
 
+ul {
+  padding-inline-start: 20px;
+}
+
 li {
   cursor: pointer;
 }

@@ -4,7 +4,6 @@ import { Fetch } from '../../services/httpService.js';
 import { EditPost } from './EditPost.js';
 
 export class ShowPosts {
-  // posts: string[];
   posts: PostsCodable;
   contentEl: HTMLDivElement;
 
@@ -20,8 +19,6 @@ export class ShowPosts {
         const list = [];
         const postsData = data.data;
 
-        // Мб проще передать функцию трансформа в ГЕТ
-        // https://bobbyhadz.com/blog/typescript-element-implicitly-has-any-type-expression#:~:text=The%20error%20%22Element%20implicitly%20has,one%20of%20the%20object's%20keys.
         if (postsData) {
           for (let key in postsData) {
             list.push({
@@ -48,6 +45,7 @@ export class ShowPosts {
 
   private append(firstTimeRender: boolean) {
     // 'firstTimeRender' - Create a new list when entering or update existing list after adding a post
+
     if (firstTimeRender === true) {
       // Appending ul
       const ulEl = document.createElement('div');
@@ -57,25 +55,34 @@ export class ShowPosts {
         `;
       this.contentEl.insertAdjacentElement('beforeend', ulEl);
 
-      // Appending all li
-      const ulElem = document.getElementById('postlist');
-      this.posts.list.forEach((el) => {
-        const liPost = document.createElement('li');
-        liPost.id = el.id!;
-        liPost.textContent = `${el.text}`;
-        ulElem!.append(liPost);
-      });
+      this.liAppender(firstTimeRender);
     } else {
-      const ulElem = document.getElementById('postlist');
-      ulElem!.innerHTML = '';
-
-      // Appending all li
-      this.posts.list.forEach((el) => {
-        const liPost = document.createElement('li');
-        liPost.id = el.id!;
-        liPost.textContent = `${el.text}`;
-        ulElem!.append(liPost);
-      });
+      this.liAppender(firstTimeRender);
     }
+  }
+
+  private liAppender(firstTimeRender: boolean) {
+    const ulElem = document.getElementById('postlist');
+    !firstTimeRender ? (ulElem!.innerHTML = '') : null;
+
+    this.posts.list.forEach((el) => {
+      const liPost = document.createElement('li');
+      liPost.id = el.id!;
+      liPost.style.marginBottom = '15px';
+      const textSpan = document.createElement('span');
+      textSpan.textContent = `${el.text}`;
+      liPost.append(textSpan);
+
+      const btns = document.createElement('div');
+      // btns.style.marginLeft = '20px';
+      btns.innerHTML = `
+        <button type="button" class="edit-post-btn" id="edit-post-btn" style="padding: 1px;">📝</button>
+        <button type="button" class="comments-btn" id="comments-btn" style="padding: 1px;">📄</button>
+      `;
+      // <button type="button" class="delete-post-btn" id="delete-post-btn" style="padding: 0px;">🗑</button>
+      liPost.append(btns);
+
+      ulElem!.append(liPost);
+    });
   }
 }

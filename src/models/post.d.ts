@@ -15,7 +15,6 @@ export type PostsCodableServerFormat = {
 };
 
 export type PostServerFormat = {
-  id: string;
   text: string;
   ownerId: string;
   created_at: Date;

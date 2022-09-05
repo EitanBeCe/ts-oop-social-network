@@ -1,6 +1,7 @@
 import { urlPostsPut } from '../../helpers/urls.js';
 import { PostCodable, PostsCodable } from '../../models/post.js';
 import { Fetch } from '../../services/httpService.js';
+import { OpenComments } from '../Comments/OpenComments.js';
 
 export class EditPost {
   ulPosts: HTMLUListElement;
@@ -19,15 +20,20 @@ export class EditPost {
   }
 
   private enterEditModeHandler(li: HTMLLIElement) {
+    // console.log(li.firstChild);
+    const textSpan = li.firstChild! as HTMLSpanElement;
+
     li.innerHTML = `
       <form action="submit" id="editpostform">
         <label for="editpost">Edit post</label>
-        <textarea type="text" id="editpost">${li.innerText}</textarea>
+        <textarea type="text" id="editpost">${textSpan.innerText}</textarea>
         <button>Edit</button>
       </form>
     `;
 
     this.configureEditPost(li);
+
+    new OpenComments(li.id, textSpan.innerText);
   }
 
   private configureEditPost(li: HTMLLIElement) {
@@ -37,7 +43,7 @@ export class EditPost {
   }
 
   private editPost(li: HTMLLIElement) {
-    console.log(li);
+    // console.log(li);
     const postId = li.id;
 
     const filteredPost = this.postsArr.list.filter((post) => post.id === postId);
@@ -53,6 +59,7 @@ export class EditPost {
       updated_at: new Date(),
     })
       .then((data) => {
+        const textSpan = li.firstChild! as HTMLSpanElement; // HERE
         if (data.data) {
           li.innerHTML = data.data.text;
         } else {
