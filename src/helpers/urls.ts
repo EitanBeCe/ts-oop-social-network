@@ -14,6 +14,6 @@ export const urlPostsPutOrDel = (postId: string) => {
 export const urlComments = (postId: string) => {
   return `${urlFirebase}/post/${postId}/comment.json`;
 };
-export const urlCommentsPutOrDel = (postId: string, commId: string) => {
-  return `${urlFirebase}/post/${postId}/comment/${commId}.json`;
+export const urlCommentsPutOrDel = (postId: string, commentId: string) => {
+  return `${urlFirebase}/post/${postId}/comment/${commentId}.json`;
 };

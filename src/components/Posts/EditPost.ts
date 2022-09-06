@@ -45,7 +45,7 @@ export class EditPost {
     const textSpan = li.getElementsByTagName('span')[0] as HTMLSpanElement;
     const postText = textSpan.innerText;
     const postId = li.id;
-    new OpenComments(postId, postText, this.userId);
+    new OpenComments(this.userId, postId, postText);
   }
 
   private delPostHandler(li: HTMLLIElement) {
@@ -120,7 +120,7 @@ export class EditPost {
       .then((data) => {
         if (data.data) {
           this.appDiv.innerHTML = '';
-          new OpenPosts(post.ownerId);
+          new OpenPosts(this.userId);
         } else {
           throw new Error('No fetched post text');
         }

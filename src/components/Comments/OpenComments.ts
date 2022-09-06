@@ -2,11 +2,16 @@ import { AddComment } from './AddComment.js';
 import { ShowComments } from './ShowComments.js';
 
 export class OpenComments {
-  constructor(public postId: string, public postText: string, public userId: string) {
+  constructor(
+    public userId: string,
+    public postId: string,
+    public postText: string,
+    firstRender: boolean = true
+  ) {
     new OpenAddCommentScreen(postText);
 
-    new AddComment(userId, postId);
-    new ShowComments(userId, postId);
+    new AddComment(userId, postId, postText);
+    new ShowComments(firstRender, userId, postId, postText);
   }
 }
 

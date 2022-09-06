@@ -7,7 +7,7 @@ import { ShowComments } from './ShowComments.js';
 export class AddComment {
   inputCommentText: HTMLTextAreaElement;
 
-  constructor(public userId: string, public postId: string) {
+  constructor(public userId: string, public postId: string, public postText: string) {
     this.inputCommentText = document.getElementById('addcomment')! as HTMLTextAreaElement;
     this.configure();
   }
@@ -34,7 +34,7 @@ export class AddComment {
     };
 
     Fetch.POST<CommentCodablePOSTResponse>(urlComments(this.postId), newComment).then(
-      () => new ShowComments(this.userId, this.postId)
+      () => new ShowComments(false, this.userId, this.postId, this.postText)
     ); // Add new comment to server and update a list of comments
     this.clearInput();
   }
