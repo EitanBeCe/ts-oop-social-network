@@ -1,4 +1,4 @@
-const urlFirebase = 'https://nathan-test-c723c-default-rtdb.firebaseio.com/api/v1_0';
+export const urlFirebase = 'https://nathan-test-c723c-default-rtdb.firebaseio.com/api/v1_0';
 // reqres.in ???
 
 export const urlAcc = `${urlFirebase}/account.json`;

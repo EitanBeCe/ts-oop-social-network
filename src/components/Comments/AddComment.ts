@@ -1,6 +1,7 @@
 import { urlComments } from '../../helpers/urls.js';
 import { CommentCodablePOSTResponse, CommentCodableServerFormat } from '../../models/comment.js';
 import { Fetch } from '../../services/httpService.js';
+import { ShowComments } from './ShowComments.js';
 
 // Functionality for comment adding
 export class AddComment {
@@ -32,11 +33,10 @@ export class AddComment {
       module_id: this.postId,
     };
 
-    Fetch.POST<CommentCodablePOSTResponse>(urlComments(this.postId), newComment);
-    // .then(
-    //   () => new ShowComments(false, this.userId)
-    // ); // Add new comment to server and update a list of comments
-    // this.clearInput();
+    Fetch.POST<CommentCodablePOSTResponse>(urlComments(this.postId), newComment).then(
+      () => new ShowComments(this.userId, this.postId)
+    ); // Add new comment to server and update a list of comments
+    this.clearInput();
   }
 
   private clearInput() {

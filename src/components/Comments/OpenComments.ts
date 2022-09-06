@@ -1,11 +1,12 @@
-import { AddComment } from './AddComment';
+import { AddComment } from './AddComment.js';
+import { ShowComments } from './ShowComments.js';
 
 export class OpenComments {
   constructor(public postId: string, public postText: string, public userId: string) {
     new OpenAddCommentScreen(postText);
 
     new AddComment(userId, postId);
-    // new ShowPosts();
+    new ShowComments(userId, postId);
   }
 }
 
