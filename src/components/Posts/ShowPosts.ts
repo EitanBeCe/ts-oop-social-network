@@ -61,7 +61,7 @@ export class ShowPosts {
     }
   }
 
-  private liAppender(firstTimeRender: boolean) {
+  public liAppender(firstTimeRender: boolean) {
     const ulElem = document.getElementById('postlist');
     !firstTimeRender ? (ulElem!.innerHTML = '') : null;
 
@@ -69,18 +69,26 @@ export class ShowPosts {
       const liPost = document.createElement('li');
       liPost.id = el.id!;
       liPost.style.marginBottom = '15px';
-      const textSpan = document.createElement('span');
-      textSpan.textContent = `${el.text}`;
-      liPost.append(textSpan);
-
-      const btns = document.createElement('div');
-      // btns.style.marginLeft = '20px';
-      btns.innerHTML = `
-        <button type="button" class="edit-post-btn" id="edit-post-btn" style="padding: 1px;">📝</button>
-        <button type="button" class="comments-btn" id="comments-btn" style="padding: 1px;">📄</button>
+      liPost.innerHTML = `
+        <span>${el.text}</span>
+        <div>
+          <button type="button" class="edit-post-btn" id="edit-post-btn" style="padding: 1px;">📝</button>
+          <button type="button" class="comments-btn" id="comments-btn" style="padding: 1px;">📄</button>
+        </div>
       `;
-      // <button type="button" class="delete-post-btn" id="delete-post-btn" style="padding: 0px;">🗑</button>
-      liPost.append(btns);
+
+      // const textSpan = document.createElement('span');
+      // textSpan.textContent = `${el.text}`;
+      // liPost.append(textSpan);
+
+      // const btns = document.createElement('div');
+      // // btns.style.marginLeft = '20px';
+      // btns.innerHTML = `
+      //   <button type="button" class="edit-post-btn" id="edit-post-btn" style="padding: 1px;">📝</button>
+      //   <button type="button" class="comments-btn" id="comments-btn" style="padding: 1px;">📄</button>
+      // `;
+      // // <button type="button" class="delete-post-btn" id="delete-post-btn" style="padding: 0px;">🗑</button>
+      // liPost.append(btns);
 
       ulElem!.append(liPost);
     });
