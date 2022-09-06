@@ -7,6 +7,6 @@ export const urlAccPut = (accId: string) => {
 };
 
 export const urlPosts = `${urlFirebase}/post.json`;
-export const urlPostsPut = (postId: string) => {
+export const urlPostsPutOrDel = (postId: string) => {
   return `${urlFirebase}/post/${postId}.json`;
 };

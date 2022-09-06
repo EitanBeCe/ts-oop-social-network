@@ -1,4 +1,4 @@
-import { urlPostsPut } from '../../helpers/urls.js';
+import { urlPosts, urlPostsPutOrDel } from '../../helpers/urls.js';
 import { PostCodable, PostsCodable } from '../../models/post.js';
 import { Fetch } from '../../services/httpService.js';
 import { OpenComments } from '../Comments/OpenComments.js';
@@ -31,6 +31,13 @@ export class EditPost {
         this.enterCommentsHandler.bind(this, li),
         { once: true }
       );
+
+      // Delete Post
+      li.getElementsByTagName('button')[2].addEventListener(
+        'click',
+        this.delPostHandler.bind(this, li),
+        { once: true }
+      );
     }
   }
 
@@ -39,6 +46,33 @@ export class EditPost {
     const postText = textSpan.innerText;
 
     new OpenComments(li.id, postText, this.userId);
+  }
+
+  private delPostHandler(li: HTMLLIElement) {
+    // console.log(li);
+    const postId = li.id;
+
+    const filteredPost = this.postsArr.list.filter((post) => post.id === postId);
+    const post = filteredPost[0];
+    // console.log(post);
+    // console.log(postId);
+    // console.log(this.postsArr);
+
+    Fetch.DEL<PostCodable>(urlPostsPutOrDel(postId))
+      .then((data) => {
+        if (data.status >= 200 && data.status < 300) {
+          this.appDiv.innerHTML = '';
+          // new OpenPosts(post.ownerId);
+          new OpenPosts(this.userId);
+        } else {
+          throw new Error('Deleting problems');
+        }
+      })
+      .catch((e) => console.error(e));
+
+    this.appDiv.innerHTML = `
+      Deleting post...
+    `;
   }
 
   private enterEditModeHandler(li: HTMLLIElement) {
@@ -81,7 +115,7 @@ export class EditPost {
     // console.log(this.postsArr);
     // console.log(editInput.value);
 
-    Fetch.PUT<PostCodable>(urlPostsPut(postId), {
+    Fetch.PUT<PostCodable>(urlPostsPutOrDel(postId), {
       created_at: post.created_at,
       ownerId: post.ownerId,
       text: editInput.value,
