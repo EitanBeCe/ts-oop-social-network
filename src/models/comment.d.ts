@@ -6,18 +6,21 @@ export type CommentCodable = {
   id: string;
   ownerId: string; // User.id (publisher)
   text: string;
-  created_at?: Date; // (datetime)
+  created_at: Date; // (datetime)
   updated_at?: Date; // (datetime)
-  module?: string; // posts
-  module_id?: string; // post.id
+  module: string; // posts
+  module_id: string; // post.id
+};
+
+export type CommentCodablePOSTResponse = {
+  name: string; // Here Firebase returns id
+};
+
+export type CommentsCodableServerFormat = {
+  id: CommentCodableServerFormat;
 };
 
 export type CommentCodableServerFormat = {
-  id: CommentServerFormat;
-};
-
-export type CommentServerFormat = {
-  id: string;
   ownerId: string;
   text: string;
   created_at: Date;

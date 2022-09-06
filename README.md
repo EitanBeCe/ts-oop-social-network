@@ -17,6 +17,7 @@ Commands:
 Дальше
 
 - firstRender мб не нужен
+- Fetch.POST в addPost без <типа>??? См AddComment под копию
 - Ошиб во всех фетчах в компонентах
 - ошибки // https://kentcdodds.com/blog/get-a-catch-block-error-message-with-typescript
   // https://www.youtube.com/watch?v=0GLYiJUBz6k

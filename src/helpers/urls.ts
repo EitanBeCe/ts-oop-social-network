@@ -10,3 +10,10 @@ export const urlPosts = `${urlFirebase}/post.json`;
 export const urlPostsPutOrDel = (postId: string) => {
   return `${urlFirebase}/post/${postId}.json`;
 };
+
+export const urlComments = (postId: string) => {
+  return `${urlFirebase}/post/${postId}/comment.json`;
+};
+export const urlCommentsPutOrDel = (postId: string, commId: string) => {
+  return `${urlFirebase}/post/${postId}/comment/${commId}.json`;
+};

@@ -1,8 +1,10 @@
+import { AddComment } from './AddComment';
+
 export class OpenComments {
   constructor(public postId: string, public postText: string, public userId: string) {
     new OpenAddCommentScreen(postText);
 
-    // new AddPost(userId);
+    new AddComment(userId, postId);
     // new ShowPosts();
   }
 }
