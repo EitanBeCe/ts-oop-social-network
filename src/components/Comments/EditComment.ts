@@ -106,6 +106,8 @@ export class EditComment {
       ownerId: comment.ownerId,
       text: editInput.value,
       updated_at: new Date(),
+      module: 'posts',
+      module_id: this.postId,
     })
       .then((data) => {
         if (data.data) {

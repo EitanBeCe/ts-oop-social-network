@@ -3,8 +3,9 @@ import { AccountCodable } from '../models/account.js';
 import { ResponseCodable } from '../models/response.js';
 import { Err } from '../helpers/errors.js';
 import { Try } from '../helpers/tryResponse.js';
+import { CommentCodable } from '../models/comment.js';
 
-type bodyTypes = AccountCodable | PostCodable;
+type bodyTypes = AccountCodable | PostCodable | CommentCodable;
 
 export class Fetch {
   static async GET<T>(url: string): Promise<ResponseCodable<T>> {

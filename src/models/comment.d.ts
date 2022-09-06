@@ -3,7 +3,7 @@ export type CommentsCodable = {
 };
 
 export type CommentCodable = {
-  id: string;
+  id?: string;
   ownerId: string; // User.id (publisher)
   text: string;
   created_at: Date; // (datetime)

@@ -116,6 +116,7 @@ export class EditPost {
       ownerId: post.ownerId,
       text: editInput.value,
       updated_at: new Date(),
+      comment: post.comment,
     })
       .then((data) => {
         if (data.data) {

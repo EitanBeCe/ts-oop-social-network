@@ -27,6 +27,7 @@ export class ShowPosts {
               ownerId: postsData[key as keyof PostsCodableServerFormat].ownerId,
               created_at: postsData[key as keyof PostsCodableServerFormat].created_at,
               updated_at: postsData[key as keyof PostsCodableServerFormat].updated_at,
+              comment: postsData[key as keyof PostsCodableServerFormat].comment,
             });
           }
         } else {
