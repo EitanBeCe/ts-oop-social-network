@@ -44,8 +44,8 @@ export class EditPost {
   private enterCommentsHandler(li: HTMLLIElement) {
     const textSpan = li.getElementsByTagName('span')[0] as HTMLSpanElement;
     const postText = textSpan.innerText;
-
-    new OpenComments(li.id, postText, this.userId);
+    const postId = li.id;
+    new OpenComments(postId, postText, this.userId);
   }
 
   private delPostHandler(li: HTMLLIElement) {
