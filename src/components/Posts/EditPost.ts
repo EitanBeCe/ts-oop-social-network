@@ -1,4 +1,4 @@
-import { urlPosts, urlPostsPutOrDel } from '../../helpers/urls.js';
+import { urlPostsPutOrDel } from '../../helpers/urls.js';
 import { PostCodable, PostsCodable } from '../../models/post.js';
 import { Fetch } from '../../services/httpService.js';
 import { OpenComments } from '../Comments/OpenComments.js';
@@ -49,26 +49,22 @@ export class EditPost {
   }
 
   private delPostHandler(li: HTMLLIElement) {
-    // console.log(li);
     const postId = li.id;
-
-    const filteredPost = this.postsArr.list.filter((post) => post.id === postId);
-    const post = filteredPost[0];
-    // console.log(post);
-    // console.log(postId);
-    // console.log(this.postsArr);
 
     Fetch.DEL<PostCodable>(urlPostsPutOrDel(postId))
       .then((data) => {
         if (data.status >= 200 && data.status < 300) {
           this.appDiv.innerHTML = '';
-          // new OpenPosts(post.ownerId);
           new OpenPosts(this.userId);
         } else {
+          new OpenPosts(this.userId);
           throw new Error('Deleting problems');
         }
       })
-      .catch((e) => console.error(e));
+      .catch((e) => {
+        console.error(e);
+        alert(e);
+      });
 
     this.appDiv.innerHTML = `
       Deleting post...
