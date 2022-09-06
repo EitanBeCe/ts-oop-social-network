@@ -1,14 +1,18 @@
 import { urlComments } from '../../helpers/urls.js';
 import { CommentCodablePOSTResponse, CommentCodableServerFormat } from '../../models/comment.js';
 import { Fetch } from '../../services/httpService.js';
+import { OpenPosts } from '../Posts/OpenPosts.js';
+import { ShowPosts } from '../Posts/ShowPosts.js';
 import { ShowComments } from './ShowComments.js';
 
 // Functionality for comment adding
 export class AddComment {
   inputCommentText: HTMLTextAreaElement;
+  backBtn: HTMLButtonElement;
 
   constructor(private userId: string, private postId: string, private postText: string) {
     this.inputCommentText = document.getElementById('addcomment')! as HTMLTextAreaElement;
+    this.backBtn = document.getElementById('comment-back-btn')! as HTMLButtonElement;
     this.configure();
   }
 
@@ -16,6 +20,11 @@ export class AddComment {
   private configure() {
     const addCommentBtn = document.getElementById('addcommentform')! as HTMLFormElement;
     addCommentBtn.addEventListener('submit', this.submitHandler.bind(this));
+    this.backBtn.addEventListener('click', this.goBackHandler.bind(this));
+  }
+
+  goBackHandler() {
+    new OpenPosts(this.userId);
   }
 
   private gatherUserInput() {

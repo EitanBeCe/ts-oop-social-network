@@ -26,6 +26,5 @@ export class Signup {
       name: this.nameInput.value,
       password: this.passwordInput.value,
     }).then((data) => data.data?.name && new OpenPosts(data.data.name));
-    // new OpenPosts();
   }
 }

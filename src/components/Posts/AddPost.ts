@@ -1,5 +1,5 @@
 import { urlPosts } from '../../helpers/urls.js';
-import { PostCodablePOSTResponse } from '../../models/post.js';
+import { PostCodablePOSTResponse, PostCodableServerFormat } from '../../models/post.js';
 import { Fetch } from '../../services/httpService.js';
 import { ShowPosts } from './ShowPosts.js';
 
@@ -25,12 +25,16 @@ export class AddPost {
   private submitHandler(event: Event) {
     event.preventDefault();
 
-    Fetch.POST<PostCodablePOSTResponse>(urlPosts, {
+    const newPost: PostCodableServerFormat = {
       text: this.gatherUserInput(),
       ownerId: this.userId,
       created_at: new Date(),
       comment: [],
-    }).then(() => new ShowPosts(false, this.userId)); // Add new post to server and update a list of posts
+    };
+
+    Fetch.POST<PostCodablePOSTResponse>(urlPosts, newPost).then(
+      () => new ShowPosts(false, this.userId)
+    ); // Add new post to server and update a list of posts
     this.clearInput();
   }
 

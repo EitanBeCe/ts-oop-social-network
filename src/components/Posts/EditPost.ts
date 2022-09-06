@@ -82,7 +82,8 @@ export class EditPost {
         <form action="submit" id="editpostform">
           <label for="editpost">Edit post</label>
           <textarea type="text" id="editpost">${postText}</textarea>
-          <button>Edit</button>
+          <button type="submit">Edit</button>
+        <button type="button" id="editpost-back-btn">Back</button>
         </form>
       </li>
     </ul>
@@ -93,8 +94,14 @@ export class EditPost {
 
   private configureEditPost(li: HTMLLIElement) {
     const editForm = document.getElementById('editpostform')! as HTMLFormElement;
+    const backBtn = document.getElementById('editpost-back-btn')! as HTMLButtonElement;
 
     editForm.addEventListener('submit', this.editPostConfirm.bind(this, li));
+    backBtn.addEventListener('click', this.goBackHandler.bind(this));
+  }
+
+  goBackHandler() {
+    new OpenPosts(this.userId);
   }
 
   private editPostConfirm(li: HTMLLIElement, e: Event) {

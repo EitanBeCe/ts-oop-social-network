@@ -19,10 +19,11 @@ class OpenAddCommentScreen {
 
   private append(postText: string) {
     this.contentEl.innerHTML = `
-			<form action="submit" id="addcommentform">
+			<form action="submit" id="addcommentform" style="width: 220px;>
 				<label for="addcomment">Add comment to post: "${postText.slice(0, 6)}..."</label>
 				<textarea type="text" id="addcomment"></textarea>
-				<button>Add</button>
+				<button type="submit">Add</button>
+        <button type="button" id="comment-back-btn">Back</button>
 			</form>
 		`;
   }

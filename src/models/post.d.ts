@@ -18,10 +18,10 @@ export type PostCodablePOSTResponse = {
 };
 
 export type PostsCodableServerFormat = {
-  id: PostServerFormat;
+  id: PostCodableServerFormat;
 };
 
-export type PostServerFormat = {
+export type PostCodableServerFormat = {
   text: string;
   ownerId: string;
   created_at: Date;

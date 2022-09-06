@@ -19,12 +19,11 @@ export class OpenAddPostScreen {
 
   private append() {
     this.contentEl.innerHTML = `
-			<form action="submit" id="addpostform">
+			<form action="submit" id="addpostform" style="width: 220px;>
 				<label for="addpost">Add post</label>
 				<textarea type="text" id="addpost"></textarea>
 				<button>Add</button>
 			</form>
-      <div id="comments" style="margin-top: 30px"></div>
 		`;
   }
 }

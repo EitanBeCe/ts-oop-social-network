@@ -72,7 +72,8 @@ export class EditComment {
         <form action="submit" id="editcommentform">
           <label for="editcomment">Edit comment</label>
           <textarea type="text" id="editcomment">${commentText}</textarea>
-          <button>Edit</button>
+          <button type="submit">Edit</button>
+          <button type="button" id="editcomment-back-btn">Back</button>
         </form>
       </li>
     </ul>
@@ -83,8 +84,14 @@ export class EditComment {
 
   private configureEditComment(li: HTMLLIElement) {
     const editForm = document.getElementById('editcommentform')! as HTMLFormElement;
+    const backBtn = document.getElementById('editcomment-back-btn')! as HTMLButtonElement;
 
     editForm.addEventListener('submit', this.editCommentConfirm.bind(this, li));
+    backBtn.addEventListener('click', this.goBackHandler.bind(this));
+  }
+
+  goBackHandler() {
+    new OpenComments(this.userId, this.postId, this.postText);
   }
 
   private editCommentConfirm(li: HTMLLIElement, e: Event) {
