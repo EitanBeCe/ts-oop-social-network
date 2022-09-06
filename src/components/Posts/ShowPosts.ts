@@ -7,7 +7,7 @@ export class ShowPosts {
   posts: PostsCodable;
   contentEl: HTMLDivElement;
 
-  constructor(public firstRender: boolean = true, public userId: string) {
+  constructor(private firstRender: boolean = true, private userId: string) {
     this.contentEl = document.getElementById('app')! as HTMLDivElement;
     this.posts = { list: [] };
     this.fetchPosts();
@@ -61,7 +61,7 @@ export class ShowPosts {
     }
   }
 
-  public liAppender(firstTimeRender: boolean) {
+  private liAppender(firstTimeRender: boolean) {
     const ulElem = document.getElementById('postlist');
     !firstTimeRender ? (ulElem!.innerHTML = '') : null;
 

@@ -8,10 +8,10 @@ export class ShowComments {
   contentEl: HTMLDivElement;
 
   constructor(
-    public firstRender: boolean = true,
-    public userId: string,
-    public postId: string,
-    public postText: string
+    private firstRender: boolean = true,
+    private userId: string,
+    private postId: string,
+    private postText: string
   ) {
     this.contentEl = document.getElementById('app')! as HTMLDivElement;
     this.comments = { list: [] };
@@ -67,7 +67,7 @@ export class ShowComments {
     }
   }
 
-  public liAppender(firstTimeRender: boolean) {
+  private liAppender(firstTimeRender: boolean) {
     const ulElem = document.getElementById('commentlist');
     !firstTimeRender ? (ulElem!.innerHTML = '') : null;
 

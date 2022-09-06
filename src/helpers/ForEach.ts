@@ -1,5 +1,5 @@
 // export class ForEach {
-//   constructor(public arr: []) {}
+//   constructor(private arr: []) {}
 
 // 	private forEach(arr: []){
 // 		arr.forEach(item => )

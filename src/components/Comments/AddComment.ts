@@ -7,7 +7,7 @@ import { ShowComments } from './ShowComments.js';
 export class AddComment {
   inputCommentText: HTMLTextAreaElement;
 
-  constructor(public userId: string, public postId: string, public postText: string) {
+  constructor(private userId: string, private postId: string, private postText: string) {
     this.inputCommentText = document.getElementById('addcomment')! as HTMLTextAreaElement;
     this.configure();
   }

@@ -7,7 +7,7 @@ import { OpenPosts } from '../Posts/OpenPosts.js';
 export class EditPost {
   appDiv: HTMLDivElement;
   ulPosts: HTMLUListElement;
-  constructor(public postsArr: PostsCodable, public userId: string) {
+  constructor(private postsArr: PostsCodable, private userId: string) {
     this.appDiv = document.getElementById('app')! as HTMLDivElement;
     this.ulPosts = document.getElementById('postlist')! as HTMLUListElement;
     this.configure();

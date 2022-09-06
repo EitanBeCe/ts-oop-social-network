@@ -6,7 +6,7 @@ import { ShowPosts } from './ShowPosts.js';
 export class AddPost {
   inputPostText: HTMLTextAreaElement;
 
-  constructor(public userId: string) {
+  constructor(private userId: string) {
     this.inputPostText = document.getElementById('addpost')! as HTMLTextAreaElement;
     this.configure();
   }

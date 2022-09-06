@@ -2,7 +2,7 @@ import { AddPost } from './AddPost.js';
 import { ShowPosts } from './ShowPosts.js';
 
 export class OpenPosts {
-  constructor(public userId: string, firstRender: boolean = true) {
+  constructor(userId: string, firstRender: boolean = true) {
     new OpenAddPostScreen();
 
     new AddPost(userId);

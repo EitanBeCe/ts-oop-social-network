@@ -16,7 +16,9 @@ Commands:
 /
 Дальше
 
-- firstRender мб не нужен
+- firstRender мб криво прописан
+- back buttons
+- public везде убрать
 - Fetch.POST в addPost без <типа>??? См AddComment под копию
 - Ошиб во всех фетчах в компонентах
 - ошибки // https://kentcdodds.com/blog/get-a-catch-block-error-message-with-typescript

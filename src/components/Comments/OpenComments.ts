@@ -2,12 +2,7 @@ import { AddComment } from './AddComment.js';
 import { ShowComments } from './ShowComments.js';
 
 export class OpenComments {
-  constructor(
-    public userId: string,
-    public postId: string,
-    public postText: string,
-    firstRender: boolean = true
-  ) {
+  constructor(userId: string, postId: string, postText: string, firstRender: boolean = true) {
     new OpenAddCommentScreen(postText);
 
     new AddComment(userId, postId, postText);
@@ -17,7 +12,7 @@ export class OpenComments {
 
 class OpenAddCommentScreen {
   contentEl: HTMLDivElement;
-  constructor(public postText: string) {
+  constructor(postText: string) {
     this.contentEl = document.getElementById('app')! as HTMLDivElement;
     this.append(postText);
   }

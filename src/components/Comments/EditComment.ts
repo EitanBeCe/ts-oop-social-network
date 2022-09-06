@@ -7,10 +7,10 @@ export class EditComment {
   appDiv: HTMLDivElement;
   ulComments: HTMLUListElement;
   constructor(
-    public commentsArr: CommentsCodable,
-    public userId: string,
-    public postId: string,
-    public postText: string
+    private commentsArr: CommentsCodable,
+    private userId: string,
+    private postId: string,
+    private postText: string
   ) {
     this.appDiv = document.getElementById('app')! as HTMLDivElement;
     this.ulComments = document.getElementById('commentlist')! as HTMLUListElement;
