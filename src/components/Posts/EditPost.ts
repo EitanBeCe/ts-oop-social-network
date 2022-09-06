@@ -13,12 +13,16 @@ export class EditPost {
     this.configure();
   }
 
-  // Listeners to all the posts
+  // Listeners to all posts. To open Edit Window
   configure() {
     const liPostArr = this.ulPosts.querySelectorAll('li')! as NodeListOf<HTMLLIElement>;
 
     for (const li of liPostArr) {
-      li.addEventListener('click', this.enterEditModeHandler.bind(this, li), { once: true });
+      li.getElementsByTagName('button')[0].addEventListener(
+        'click',
+        this.enterEditModeHandler.bind(this, li),
+        { once: true }
+      );
     }
   }
 
