@@ -6,7 +6,7 @@ export class OpenPosts {
     new OpenAddPostScreen();
 
     new AddPost(userId);
-    new ShowPosts(firstRender);
+    new ShowPosts(firstRender, userId);
   }
 }
 

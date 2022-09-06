@@ -43,6 +43,20 @@ export class Fetch {
       return Err.handler<T>(error, response);
     }
   }
+
+  static async DEL<T>(url: string): Promise<ResponseCodable<T>> {
+    const response = await fetch(url, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      // body: JSON.stringify(body),
+    });
+
+    try {
+      return Try.response<T>(response, 'DELETE');
+    } catch (error) {
+      return Err.handler<T>(error, response);
+    }
+  }
 }
 
 // for (let key in data) {

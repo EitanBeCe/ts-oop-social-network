@@ -7,7 +7,7 @@ export class ShowPosts {
   posts: PostsCodable;
   contentEl: HTMLDivElement;
 
-  constructor(public firstRender: boolean = true) {
+  constructor(public firstRender: boolean = true, public userId: string) {
     this.contentEl = document.getElementById('app')! as HTMLDivElement;
     this.posts = { list: [] };
     this.fetchPosts();
@@ -40,7 +40,7 @@ export class ShowPosts {
 
         return this.posts;
       })
-      .then((postsArr) => new EditPost(postsArr));
+      .then((postsArr) => new EditPost(postsArr, this.userId));
   }
 
   private append(firstTimeRender: boolean) {
@@ -74,6 +74,7 @@ export class ShowPosts {
         <div>
           <button type="button" class="edit-post-btn" id="edit-post-btn" style="padding: 1px;">📝</button>
           <button type="button" class="comments-btn" id="comments-btn" style="padding: 1px;">📄</button>
+          <button type="button" class="delete-post-btn" id="comments-btn" style="padding: 1px;">🗑</button>
         </div>
       `;
 

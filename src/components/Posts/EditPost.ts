@@ -7,23 +7,38 @@ import { OpenPosts } from '../Posts/OpenPosts.js';
 export class EditPost {
   appDiv: HTMLDivElement;
   ulPosts: HTMLUListElement;
-  constructor(public postsArr: PostsCodable) {
+  constructor(public postsArr: PostsCodable, public userId: string) {
     this.appDiv = document.getElementById('app')! as HTMLDivElement;
     this.ulPosts = document.getElementById('postlist')! as HTMLUListElement;
     this.configure();
   }
 
-  // Listeners to all posts. To open Edit Window
+  // Listeners to all posts. To open Edit Window, Enter Comments and Delete post
   configure() {
     const liPostArr = this.ulPosts.querySelectorAll('li')! as NodeListOf<HTMLLIElement>;
 
     for (const li of liPostArr) {
+      // Open Edit Window
       li.getElementsByTagName('button')[0].addEventListener(
         'click',
         this.enterEditModeHandler.bind(this, li),
         { once: true }
       );
+
+      // Enter Comments
+      li.getElementsByTagName('button')[1].addEventListener(
+        'click',
+        this.enterCommentsHandler.bind(this, li),
+        { once: true }
+      );
     }
+  }
+
+  private enterCommentsHandler(li: HTMLLIElement) {
+    const textSpan = li.getElementsByTagName('span')[0] as HTMLSpanElement;
+    const postText = textSpan.innerText;
+
+    new OpenComments(li.id, postText, this.userId);
   }
 
   private enterEditModeHandler(li: HTMLLIElement) {
@@ -44,8 +59,6 @@ export class EditPost {
     `;
 
     this.configureEditPost(li);
-
-    // new OpenComments(li.id, postText);
   }
 
   private configureEditPost(li: HTMLLIElement) {
@@ -73,22 +86,19 @@ export class EditPost {
       ownerId: post.ownerId,
       text: editInput.value,
       updated_at: new Date(),
-    }).then((data) => {
-      // const ShowPost = new ShowPosts();
-      // const textSpan = li.firstChild! as HTMLSpanElement; // HERE
-      if (data.data) {
-        this.appDiv.innerHTML = '';
-        new OpenPosts(post.ownerId);
-        // ShowPost.liAppender(true);
-        // li.innerHTML = data.data.text;
-      } else {
-        throw new Error('No fetched post text');
-      }
-    });
-    //   .then(() =>
-    //     li.addEventListener('click', this.enterEditModeHandler.bind(this, li), { once: true })
-    //   )
-    //   .catch((e) => console.error(e));
+    })
+      .then((data) => {
+        if (data.data) {
+          this.appDiv.innerHTML = '';
+          new OpenPosts(post.ownerId);
+        } else {
+          throw new Error('No fetched post text');
+        }
+      })
+      //   .then(() =>
+      //     li.addEventListener('click', this.enterEditModeHandler.bind(this, li), { once: true })
+      //   )
+      .catch((e) => console.error(e));
 
     this.appDiv.innerHTML = `
       Changing post...

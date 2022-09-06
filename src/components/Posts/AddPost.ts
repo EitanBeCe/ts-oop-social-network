@@ -28,7 +28,7 @@ export class AddPost {
       text: this.gatherUserInput(),
       ownerId: this.userId,
       created_at: new Date(),
-    }).then(() => new ShowPosts(false)); // Add new post to server and update a list of posts
+    }).then(() => new ShowPosts(false, this.userId)); // Add new post to server and update a list of posts
     this.clearInput();
   }
 
