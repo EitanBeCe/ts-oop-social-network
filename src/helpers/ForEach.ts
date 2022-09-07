@@ -1,3 +1,5 @@
+// Side task
+
 type ListModel = { list: InnerListModel };
 type InnerListModel = InnerItemModel[];
 type InnerItemModel = { id: number; name: string };
