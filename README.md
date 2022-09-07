@@ -1,4 +1,4 @@
-# Task:
+# My Task was:
 
 Write a program with TypeScript (version 4.7 and newer), that meets the following criteria:
 
@@ -14,10 +14,15 @@ Write a program with TypeScript (version 4.7 and newer), that meets the followin
 - ✅All arguments/parameters and variables must be have type annotations.
 - ✅All models (below) must have models ${Model}.d.ts files.
 - ✅For UI you can make simple html files (also with simple css styles) (without usage of external libraries like bootstrap)
+- (Full task is [here](TASK.pdf))
 
 ## What else:
 
 ✅Edded DELETE method
+
+## Scrins
+
+![Alt text](/src/img/screenshots/screen1.png?raw=true 'header')
 
 ## Commands:
 
