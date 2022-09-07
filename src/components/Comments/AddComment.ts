@@ -2,7 +2,6 @@ import { urlComments } from '../../helpers/urls.js';
 import { CommentCodablePOSTResponse, CommentCodableServerFormat } from '../../models/comment.js';
 import { Fetch } from '../../services/httpService.js';
 import { OpenPosts } from '../Posts/OpenPosts.js';
-import { ShowPosts } from '../Posts/ShowPosts.js';
 import { ShowComments } from './ShowComments.js';
 
 // Functionality for comment adding
