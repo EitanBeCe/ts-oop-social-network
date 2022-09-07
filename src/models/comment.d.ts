@@ -13,7 +13,7 @@ export type CommentCodable = {
 };
 
 export type CommentCodablePOSTResponse = {
-  name: string; // Here Firebase returns id
+  name: string; // Firebase returns id
 };
 
 export type CommentsCodableServerFormat = {
