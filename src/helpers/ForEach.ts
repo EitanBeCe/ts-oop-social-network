@@ -41,12 +41,12 @@ export class LetsUseForEach {
   }
 }
 
-// Copy from task
-
 // Nathan's variant: Parameter 'item' implicitly has an 'any' type.
 // ForEach(this.object.list ?? [], 'id', (item) => {
 //   console.debug(item);
 // });
+
+// Copy from task
 
 // constructor() {
 // ForEach(this.object.list ?? [], 'id', (item) => {
