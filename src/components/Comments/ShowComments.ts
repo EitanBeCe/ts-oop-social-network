@@ -37,7 +37,7 @@ export class ShowComments {
             });
           }
         } else {
-          // error
+          throw new Error('Could not GET the comments');
         }
 
         this.comments.list = list;
@@ -47,7 +47,8 @@ export class ShowComments {
 
         return this.comments;
       })
-      .then((commentsArr) => new EditComment(commentsArr, this.userId, this.postId, this.postText));
+      .then((commentsArr) => new EditComment(commentsArr, this.userId, this.postId, this.postText))
+      .catch((err) => console.error(err));
   }
 
   private append(firstTimeRender: boolean) {

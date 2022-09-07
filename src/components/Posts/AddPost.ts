@@ -32,9 +32,9 @@ export class AddPost {
       comment: [],
     };
 
-    Fetch.POST<PostCodablePOSTResponse>(urlPosts, newPost).then(
-      () => new ShowPosts(false, this.userId)
-    ); // Add new post to server and update a list of posts
+    Fetch.POST<PostCodablePOSTResponse>(urlPosts, newPost)
+      .then(() => new ShowPosts(false, this.userId)) // Add new post to server and update a list of posts
+      .catch((err) => console.error('Probably could not add a post' + err));
     this.clearInput();
   }
 

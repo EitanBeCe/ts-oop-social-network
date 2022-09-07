@@ -42,9 +42,9 @@ export class AddComment {
       module_id: this.postId,
     };
 
-    Fetch.POST<CommentCodablePOSTResponse>(urlComments(this.postId), newComment).then(
-      () => new ShowComments(false, this.userId, this.postId, this.postText)
-    ); // Add new comment to server and update a list of comments
+    Fetch.POST<CommentCodablePOSTResponse>(urlComments(this.postId), newComment)
+      .then(() => new ShowComments(false, this.userId, this.postId, this.postText)) // Add new comment to server and update a list of comments
+      .catch((err) => console.error(err));
     this.clearInput();
   }
 

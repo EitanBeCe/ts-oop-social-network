@@ -31,7 +31,7 @@ export class ShowPosts {
             });
           }
         } else {
-          // error
+          throw new Error('Could not GET posts');
         }
 
         this.posts.list = list;
@@ -41,7 +41,8 @@ export class ShowPosts {
 
         return this.posts;
       })
-      .then((postsArr) => new EditPost(postsArr, this.userId));
+      .then((postsArr) => new EditPost(postsArr, this.userId))
+      .catch((err) => console.error(err));
   }
 
   private append(firstTimeRender: boolean) {

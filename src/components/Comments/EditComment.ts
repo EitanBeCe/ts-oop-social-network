@@ -124,10 +124,7 @@ export class EditComment {
           throw new Error('No fetched comment text');
         }
       })
-      //   .then(() =>
-      //     li.addEventListener('click', this.enterEditModeHandler.bind(this, li), { once: true })
-      //   )
-      .catch((e) => console.error(e));
+      .catch((err) => console.error(err));
 
     this.appDiv.innerHTML = `
       Changing comment...

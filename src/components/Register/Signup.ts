@@ -25,6 +25,8 @@ export class Signup {
     Fetch.POST<AccountCodablePOSTResponse>(urlAcc, {
       name: this.nameInput.value,
       password: this.passwordInput.value,
-    }).then((data) => data.data?.name && new OpenPosts(data.data.name));
+    })
+      .then((data) => data.data?.name && new OpenPosts(data.data.name))
+      .catch((err) => console.error(err));
   }
 }

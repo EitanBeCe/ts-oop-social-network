@@ -42,7 +42,7 @@ export class ChangePass {
             });
           }
         } else {
-          // ERROR
+          throw new Error('Could not GET accounts info');
         }
         this.users.list = list;
         // console.log(this.users.list);

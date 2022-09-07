@@ -40,7 +40,7 @@ export class Login {
             });
           }
         } else {
-          // ERROR
+          throw new Error('Could not GET accounts');
         }
         this.users.list = list;
         // console.log(this.users.list);
