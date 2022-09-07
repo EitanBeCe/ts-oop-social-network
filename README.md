@@ -22,9 +22,9 @@ Write a program with TypeScript (version 4.7 and newer), that meets the followin
 
 ## Scrins
 
-![Alt text](/src/img/screenshots/screenAdd.png?raw=true 'header')
-![Alt text](/src/img/screenshots/screenFetch.png?raw=true 'header')
-![Alt text](/src/img/screenshots/screenModel.png?raw=true 'header')
+![Alt text](/src/img/screenshots/screenAdd.png?raw=true 'AddScreen')
+![Alt text](/src/img/screenshots/screenFetch.png?raw=true 'Fetch')
+![Alt text](/src/img/screenshots/screenModel.png?raw=true 'Models')
 
 ## Commands:
 
