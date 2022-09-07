@@ -133,9 +133,6 @@ export class EditPost {
           throw new Error('No fetched post text');
         }
       })
-      //   .then(() =>
-      //     li.addEventListener('click', this.enterEditModeHandler.bind(this, li), { once: true })
-      //   )
       .catch((e) => console.error(e));
 
     this.appDiv.innerHTML = `
