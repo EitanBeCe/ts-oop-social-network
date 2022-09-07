@@ -1,19 +1,21 @@
 // Side task
 
 type ListModel = { list: InnerListModel };
-type InnerListModel = InnerItemModel[];
-type InnerItemModel = { id: number; name: string };
+type InnerListModel = ItemModel[];
+type AnyArrModel = any[];
+type ItemModel = { id: number; name: string };
+type Fn<T> = (item: T, key: keyof T) => void;
 
-class ForEachClass {
-  constructor(someList: InnerListModel, key: string, fn: Function) {
-    someList.forEach((item) => {
-      fn(item, item[key as keyof InnerItemModel]);
+class ForEachClass<T extends AnyArrModel, U extends keyof T> {
+  constructor(someList: T, key: U, fn: Fn<T>) {
+    someList.forEach(<T>(item) => {
+      fn(item, item[key]);
     });
   }
 }
 
 // To call ForEachClass without "new"
-const ForEach = (someList: InnerListModel, key: string, fn: Function) => {
+const ForEach = <T extends AnyArrModel, U extends keyof T>(someList: T, key: U, fn: Fn<T>) => {
   return new ForEachClass(someList, key, fn);
 };
 
@@ -32,10 +34,10 @@ export class LetsUseForEach {
   };
 
   constructor() {
-    ForEach(this.object.list ?? [], 'id', (item: {}) => {
+    ForEach(this.object.list ?? [], 'id', (item) => {
       console.log(`Item: ${JSON.stringify(item)}`);
     });
-    ForEach(this.object2.list ?? [], 'id', (item: {}, key: keyof {}) => {
+    ForEach(this.object2.list ?? [], 'id', (item, key: keyof ItemModel) => {
       console.log(`Item: ${JSON.stringify(item)}. Key value: ${key}`);
     });
   }
