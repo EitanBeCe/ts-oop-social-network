@@ -1,4 +1,4 @@
-# My Task was:
+# Task:
 
 Write a program with TypeScript (version 4.7 and newer), that meets the following criteria:
 
