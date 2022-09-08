@@ -7,6 +7,7 @@ type ItemModel = { id: number; name: string };
 type Fn<T> = (item: T, key: keyof T) => void;
 
 class ForEachClass {
+  // More narrowed version
   constructor(someList: InnerListModel, key: keyof ItemModel, fn: Fn<ItemModel>) {
     someList.forEach((item) => fn(item, key));
   }
@@ -35,14 +36,17 @@ export class LetsUseForEach {
     ForEach(this.object.list ?? [], 'id', (item) => {
       console.log(`Item: ${JSON.stringify(item)}`);
     });
+    // Key value
     ForEach(this.object2.list ?? [], 'id', (item, key) => {
       console.log(`Item: ${JSON.stringify(item)}. Key value: ${item[key]}`);
     });
+    // Key
     ForEach(this.object2.list ?? [], 'id', (item, key) => {
       console.log(`Item: ${JSON.stringify(item)}. Key: ${key}`);
     });
-    ForEach(this.object2.list ?? [], 'name', (item, key) => {
-      console.log(`Item: ${JSON.stringify(item)}. Key: ${key}`);
-    });
+    // Error example
+    // ForEach(this.object2.list ?? [], 'title', (item, key) => {
+    //   console.log(`Item: ${JSON.stringify(item)}. Key: ${key}`);
+    // });
   }
 }
