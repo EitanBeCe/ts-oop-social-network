@@ -24,7 +24,7 @@ Write a program with TypeScript (version 4.7 and newer), that meets the followin
 
 ## Scrins
 
-![Universal ForEach (last task)](/src/img/screenshots/screenForEach.png.png?raw=true 'ForEach')
+![Alt text](/src/img/screenshots/screenForEach.png.png?raw=true 'ForEach')
 ![Alt text](/src/img/screenshots/screenAdd.png?raw=true 'AddScreen')
 ![Alt text](/src/img/screenshots/screenFetch.png?raw=true 'Fetch')
 ![Alt text](/src/img/screenshots/screenModel.png?raw=true 'Models')
