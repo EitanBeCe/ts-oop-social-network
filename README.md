@@ -20,7 +20,8 @@ Write a program with TypeScript (version 4.7 and newer), that meets the followin
 
 ## What else:
 
-✅Edded DELETE method
+✅Added DELETE method
+✅Added 2 more ways in ForEach universal class
 
 ## Scrins
 
